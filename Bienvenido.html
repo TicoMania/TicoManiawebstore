@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIENVENIDO - TicoMania</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/originals/c6/1d/95/c61d95738bf8cc5c8e9863bd8d638a78.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #000; /* Cambiar color del texto a blanco */
+        }
+        .bienvenida {
+            text-align: center; 
+            padding: 100px 0;
+            animation: animateWelcome 2s infinite alternate; 
+        }
+        .bienvenida h1 {
+            font-size: 72px; /* Aumentar tamaño de fuente */
+        }
+        .bienvenida p {
+            font-size: 24px; /* Aumentar tamaño de fuente */
+        }
+        .ubicacion {
+            text-align: center; /* Centrar el texto */
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column; /* Organizar elementos en columna */
+            align-items: center; /* Centrar elementos horizontalmente */
+        }
+        .ubicacion p {
+            font-size: 18px; /* Aumentar tamaño de fuente */
+            color: #000; /* Cambiar color del texto a negro */
+            margin-bottom: 10px; /* Espacio inferior entre el texto y la imagen */
+        }
+        .ubicacion img {
+            max-width: 200px; /* Aumentar tamaño de la imagen */
+            height: auto; /* Altura automática */
+        }
+        .catálogo {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .catálogo a {
+            font-size: 18px; /* Aumentar tamaño de fuente */
+            color: #fff; /* Cambiar color del enlace a blanco */
+            text-decoration: none;
+            padding: 10px 20px; 
+            background-color: #333; 
+            border-radius: 5px; 
+            transition: background-color 0.3s ease; 
+        }
+        .catálogo a:hover {
+            background-color: #555; 
+        }
+
+        @keyframes animateWelcome {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(10px); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bienvenida">
+        <h1>WELCOME</h1>
+        <p>To TicoMania</p>
+    </div>
+    <div class="ubicacion">
+        <p>Physical Store Location: In the heart of downtown Alajuela, Costa Rica</p>
+        <img src="https://google-maps-proxy.lodgify.com/maps/api/staticmap?center=10.017736,-84.210561&zoom=13&scale=2&size=363x200&markers=icon:https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png|10.017736,-84.210561&&key=AIzaSyB83oLNUmqes7wBlxqQ7yQbXuF-K5faJb4" alt="Ubication">
+    </div>
+    <div class="catálogo">
+        <a href="TicoMania.html">See Catalogue</a>
+    </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Virtual - TicoMania</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Alineación vertical de los elementos en el centro */
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .producto {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .producto img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .cantidad {
+            margin-top: 10px;
+        }
+        #lista-compra {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        #lista-compra ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #lista-compra ul li {
+            margin-bottom: 5px;
+        }
+        #mensaje-carrito {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 999; /* Para que esté por encima de los demás elementos */
+        }
+        .cerrar-ventana {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TicoMania</h1>
+        <i class="fas fa-shopping-cart icono-carrito" onclick="mostrarListaCompra()"></i> <!-- Icono del carrito de compra -->
+    </header>
+    <div id="lista-compra"> <!-- Lista de compra oculta por defecto -->
+        <span class="cerrar-ventana" onclick="cerrarListaCompra()">X</span>
+        <h3>Lista de Compra</h3>
+        <ul id="productos-comprados">
+            <!-- Aquí se mostrarán los nombres y precios de los productos comprados -->
+        </ul>
+        <div id="total-carrito"></div> <!-- Mostrará el total del carrito -->
+    </div>
+    <div class="container">
+        <div class="producto">
+            <h2>MP3 Player USB</h2>
+            <img src="https://image.made-in-china.com/202f0j00DnYaOtsKHhkQ/New-Generation-AAA-Battery-MP3-Player.webp" alt="MP3 Player USB con batería AAA">
+            <p>Basic portable MP3 player USB digital LCD screen with limited storage.<p>
+			<p>Precio: $15</p>
+            <div class="cantidad">
+                <label for="cantidad1">Cantidad:</label>
+                <input type="number" id="cantidad1" name="cantidad1" value="1" min="1">
+            </div>
+            <button onclick="agregarAlCarrito(1)">Añadir al carrito</button>
+        </div>
+        <div class="producto">
+            <h2>MP3 player with buttons</h2>
+            <img src="https://my-live-01.slatic.net/p/22e1211145c3d99ba509d6fc8ebb3ad1.jpg" alt="Mini MP3 player type student">
+            <p>Mid-range mini MP3 player portable music player type student with moderate storage and basic features.<p>
+			<p>Precio: $50</p>
+            <div class="cantidad">
+                <label for="cantidad2">Cantidad:</label>
+                <input type="number" id="cantidad2" name="cantidad2" value="1" min="1">
+            </div>
+            <button onclick="agregarAlCarrito(2)">Añadir al carrito</button>
+        </div>
+        <div class="producto">
+            <h2>MP3 player Bluetooth</h2>
+            <img src="https://m.media-amazon.com/images/I/618S7NwocyL._AC_SL1500_.jpg" alt="High-end MP3 player">
+            <p>High-end MP3 player with touch screen and Bluetooth connectivity and high audio quality.<p>
+			<p>Precio: $75</p>
+            <div class="cantidad">
+                <label for="cantidad3">Cantidad:</label>
+                <input type="number" id="cantidad3" name="cantidad3" value="1" min="1">
+            </div>
+            <button onclick="agregarAlCarrito(3)">Añadir al carrito</button>
+        </div>
+    </div>
+
+    <div id="mensaje-carrito"></div> <!-- Mensaje de confirmación de añadido al carrito -->
+
+    <script>
+        function agregarAlCarrito(producto) {
+            var cantidad = document.getElementById("cantidad" + producto).value;
+            var nombreProducto = document.querySelector('.producto:nth-child(' + producto + ') h2').textContent;
+            var precioProducto = parseFloat(document.querySelector('.producto:nth-child(' + producto + ') p').textContent.split(": ")[1].replace("$", ""));
+            var totalProducto = parseFloat(cantidad) * precioProducto;
+            
+            var listaCompra = document.getElementById("productos-comprados");
+            var item = document.createElement("li");
+            item.textContent = nombreProducto + " - Cantidad: " + cantidad + " - Precio Total: $" + totalProducto.toFixed(2);
+            listaCompra.appendChild(item);
+
+            actualizarTotalCarrito();
+            mostrarMensajeCarrito(cantidad, nombreProducto);
+        }
+
+        function mostrarListaCompra() {
+            var listaCompra = document.getElementById("lista-compra");
+            if (listaCompra.style.display === "none") {
+                listaCompra.style.display = "block";
+            } else {
+                listaCompra.style.display = "none";
+            }
+        }
+
+        function cerrarListaCompra() {
+            var listaCompra = document.getElementById("lista-compra");
+            listaCompra.style.display = "none";
+        }
+
+        function mostrarMensajeCarrito(cantidad, producto) {
+            var mensajeCarrito = document.getElementById("mensaje-carrito");
+            mensajeCarrito.textContent = "Se añadieron " + cantidad + " unidades de " + producto + " al carrito.";
+            mensajeCarrito.style.display = "block";
+            setTimeout(function() {
+                mensajeCarrito.style.display = "none";
+            }, 2000);
+        }
+
+        function actualizarTotalCarrito() {
+            var totalCarrito = 0;
+            var productos = document.querySelectorAll("#productos-comprados li");
+            productos.forEach(function(producto) {
+                var precio = parseFloat(producto.textContent.split(" - Precio Total: $")[1]);
+                totalCarrito += precio;
+            });
+            document.getElementById("total-carrito").textContent = "Total Carrito: $" + totalCarrito.toFixed(2);
+        }
+    </script>
+</body>
+</html>
